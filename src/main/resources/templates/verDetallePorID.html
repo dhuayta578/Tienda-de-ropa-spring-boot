@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<meta charset="UTF-8">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<h2>Detalle del Producto:</h2>
+		<h4 th:text="${producto.id}"></h4>
+		<h4 th:text="${producto.Descripcion}"></h4>
+		<div class="card bg-light">
+			<table class="table">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">ID de Detalle</th>
+						<th scope="col">Precio Unidad</th>
+						<th scope="col">Cantidad</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="det:${detalles}">
+						<td th:text="${det.id}"></td>
+						<td th:text="${det.precio_unidad}"></td>
+						<td th:text="${det.cantidad}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<a class="btn btn-danger" href="javascript:history.back()"> Volver Atrás</a>
+		</div>
+	</div>
+</body>
+</html>

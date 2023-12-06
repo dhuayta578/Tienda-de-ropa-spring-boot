@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<head>
+<meta charset="ISO-8859-1">
+<title>Men's Clothing Store </title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css'>
+	<style type="text/css">
+@page {
+  bleed: 1cm;
+  size: A4 portrait;
+      size:  auto;   /* auto is the initial value */
+      margin-left: 0mm;  /* this affects the margin in the printer settings */
+      margin-bottom: 0mm;
+      margin-top: 0mm;
+
+
+}
+  html
+  {
+      background-color: #FFFFFF;
+      margin: 0px;  /* this affects the margin on the html before sending to printer */
+  }
+
+  body
+  {
+      border: solid 1px #6FB6AE ;
+      margin: 10mm 15mm 10mm 15mm; /* margin you want for the content */
+  }
+@media print {
+  .page {
+    margin: 0;
+    border: initial;
+    border-radius: initial;
+    width: initial;
+    min-height: initial;
+    box-shadow: initial;
+    background: initial;
+    page-break-after: always;
+  }
+}
+
+body{
+  background-color: #eee;
+  -webkit-print-color-adjust: exact !important;
+}
+
+img.logo{
+     margin-left: 70%;
+}
+
+.container{
+  background-color: #6FB6AE;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+/*   box-shadow: 0 10px 10px #999; */
+}
+
+div.header{
+  position: relative;
+}
+
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+  border-left: 60px solid white;
+  z-index: 3;
+  position: absolute;
+  left: 735px;
+  top: 75px;
+}
+
+h1.title{
+  display: inline-block;
+  z-index: 1;
+  color: white;
+  font-size: 72px;
+  position: absolute;
+  top: 50px;
+  left: 40px;
+}
+
+div.header::after{
+  background-color: white;
+  height: 50px;
+  width: 120px;
+}
+
+div.shape{
+  width: 60%;
+  height: 150px;
+  background-color: white;
+  position: absolute;
+  top: 50px;
+}
+
+
+div.invoice-content{
+  background-color: white;
+  margin-top: -2px;
+  z-index: 3;
+  border-bottom: 5px solid CADETBLUE;
+  padding-bottom: 15px;
+}
+
+div.invoiced-to {
+  color: #333;
+}
+
+div.invoiced-details{
+  background-color: #efefef;
+}
+
+table > thead.thead-blue{
+  background-color: #D8E8E6;
+  color: #6FB6AE;
+}
+
+div.background{
+  background-color: white;
+}
+
+tr.last-row{
+  border-bottom: 3px solid #333;
+}
+
+td.total{
+  width: 200px;
+}
+
+td.total-value{
+  width: 100px;
+}
+
+td.total, td.total-value{
+  background-color: #B9DA69;
+  color: white;
+}
+
+td.empty{
+  visibility: hidden;
+}
+
+.color{
+  color: #0079C2;
+}
+
+td.total-value{
+  width: auto;
+}
+.carrito-producto-imagen {
+    width: 4rem;
+    border-radius: 1rem;
+}
+
+
+
+.boton {
+ padding: 17px 40px;
+ border-radius: 50px;
+ border: 0;
+ background-color: white;
+ box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+ letter-spacing: 1.5px;
+ text-transform: uppercase;
+ font-size: 15px;
+ transition: all .5s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+.boton:hover {
+ letter-spacing: 3px;
+ background-color: hsl(261deg 80% 48%);
+ color: hsl(0, 0%, 100%);
+ box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+
+.boton:active {
+ letter-spacing: 3px;
+ background-color: hsl(261deg 80% 48%);
+ color: hsl(0, 0%, 100%);
+ box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+ transform: translateY(10px);
+ transition: 100ms;
+}
+</style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Detalles de Pedido</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Usuario</th>
+                    <th>Producto</th>
+                    <th>Precio por Unidad</th>
+                    <th>ID del Producto</th>
+                    <th>ID del Usuario</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="${pedido.cantidad}"></td>
+                    <td th:text="${pedido.estado}"></td>
+                    <td th:text="${pedido.usuario}"></td>
+                    <td th:text="${pedido.producto}"></td>
+                    <td th:text="${pedido.precio_unidad}"></td>
+                    <td th:text="${pedido.producto_id.id}"></td>
+                    <td th:text="${pedido.usuario_id.id}"></td>
+                </tr>
+            </tbody>
+        </table>
+         <button onclick="goBack()" class="btn btn-secondary">Atrás</button>
+    </div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
